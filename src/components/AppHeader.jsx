@@ -1,6 +1,18 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function AppHeader() {
+
+    const navLinks = [
+        {
+            path: "/",
+            title: "Home"
+        },
+        {
+            path: "/movies",
+            title: "Movies"
+        }
+    ]
+
     return (
         <>
             <header>
@@ -20,16 +32,13 @@ function AppHeader() {
                         </button>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li className="nav-item">
-                                    <Link to="/" className="nav-link" aria-current="page">
-                                        Home
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/movies" className="nav-link" aria-current="page">
-                                        Movies
-                                    </Link>
-                                </li>
+                                {navLinks.map((curLink, index) => (
+                                    <li className="nav-item" key={index}>
+                                        <NavLink to={curLink.path} className="nav-link" aria-current="page">
+                                            {curLink.title}
+                                        </NavLink>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
