@@ -5,15 +5,13 @@ import ReviewCard from "../components/ReviewCard";
 import Stars from "../components/Stars";
 
 function SingleMoviePage() {
-    const { id } = useParams();
+    const { slug } = useParams();
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [movie, setMovie] = useState(null);
 
     useEffect(() => {
-        axios.get(`${backendUrl}/movies/${id}`).then((resp) => {
+        axios.get(`${backendUrl}/movies/${slug}`).then((resp) => {
             setMovie(resp.data.data);
-            console.log("Dati ricevuti:", resp.data.data);
-            console.log("Vote Avg:", resp.data.data.vote_avg)
         });
     }, []);
 
