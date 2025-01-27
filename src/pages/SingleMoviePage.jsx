@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReviewCard from "../components/ReviewCard";
+import Stars from "../components/Stars";
 
 function SingleMoviePage() {
     const { id } = useParams();
@@ -29,7 +30,7 @@ function SingleMoviePage() {
                             <h5 className="mb-3">{movie.director}</h5>
                             <p className="mb-1"><strong>Anno:</strong> {movie.release_year}</p>
                             <p className="mb-1"><strong>Genre:</strong> {movie.genre}</p>
-                            <p className="mb-1"><strong>Vote:</strong> {movie.vote_avg}</p>
+                            <p className="mb-1"><strong>Average Rating:</strong> <Stars vote={movie.vote_avg} /></p>
                         </div>
                     </section>
                     <section>
