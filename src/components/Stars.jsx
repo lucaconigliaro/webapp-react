@@ -14,7 +14,7 @@ function Stars({ vote }) {
         stars.push(<i key={`empty-${i}`} className="far fa-star star-gold"></i>);
     }
 
-    return <div>{stars}</div>;
+    return <span>{stars}</span>;
 };
 
 export default Stars;
