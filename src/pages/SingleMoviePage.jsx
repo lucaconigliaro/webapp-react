@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReviewCard from "../components/ReviewCard";
 import Stars from "../components/Stars";
+import ReviewForm from "../components/ReviewForm";
 
 function SingleMoviePage() {
     const { slug } = useParams();
@@ -34,6 +35,14 @@ function SingleMoviePage() {
                     <section>
                         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
                             {movie.reviews.map(curReview => <ReviewCard key={curReview.id} review={curReview} />)}
+                        </div>
+                    </section>
+                    <section>
+                        <div className="row justify-content-center my-5">
+                            <div className="col-6">
+                                <h5>Lascia la tua recensione!</h5>
+                                <ReviewForm />
+                            </div>
                         </div>
                     </section>
                 </>
