@@ -5,16 +5,35 @@ import ReviewCard from "../components/ReviewCard";
 import Stars from "../components/Stars";
 import ReviewForm from "../components/ReviewForm";
 
+const initialValues = {
+    name: "",
+    text: "",
+    vote: 0,
+};
+
 function SingleMoviePage() {
     const { slug } = useParams();
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [movie, setMovie] = useState(null);
+    const [formData, setFormData] = useState(initialValues);
 
-    useEffect(() => {
+
+    const getMovie = () => {
         axios.get(`${backendUrl}/movies/${slug}`).then((resp) => {
             setMovie(resp.data.data);
         });
+    };
+
+    useEffect(() => {
+        getMovie();
     }, []);
+
+    const submitReview = () => {
+        axios.post(`${backendUrl}/movies/${movie.id}/reviews`, formData).then((resp) => {
+            setFormData(initialValues);
+            getMovie();
+        });
+    };
 
     return (
         <>
@@ -41,7 +60,11 @@ function SingleMoviePage() {
                         <div className="row justify-content-center my-5">
                             <div className="col-6">
                                 <h5>Lascia la tua recensione!</h5>
-                                <ReviewForm />
+                                <ReviewForm
+                                    formData={formData}
+                                    setFormData={setFormData}
+                                    submitReview={submitReview}
+                                />
                             </div>
                         </div>
                     </section>
